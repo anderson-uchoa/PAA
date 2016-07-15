@@ -1,3 +1,18 @@
+
+/* 
+
+Anderson Gonçalves Uchôa 0346979
+Randerson Lessa Melo 358347
+
+PROBLEMA 3 
+
+O laço while será executado no pior caso n vezes, onde n é o número de vértices do grafo.
+ Além disso, cada iteração neste laço envolve uma pesquisa em todos os nós do grafo
+ for (int i = 0; i < numeroDeVertices; i++) 
+ para atualização o custo e descoberta do vertice com menor custo. 
+ Logo este algoritmo tem complexidade O(n^2).
+
+*/
 		
 #include <cstdio>
 #include <iostream>
@@ -18,19 +33,23 @@ int paisesEmGuerra (int cidadeDeOrigem, int cidadeDeDestino, int numeroDeVertice
     int custo[MAXCIDADES];
     int visitados[MAXCIDADES];
 	
-	// inicia o vetor de custo e visitados
+	/* inicializa matriz de adjacência que representa o grafo */
     for(int i = 0; i < numeroDeVertices; i++){
         visitados[i] = false;
         custo[i] = INFINITO;
     }
 
-    // atribui o custo zero a cidade de origem 	
+    /* atribui o custo zero a cidade de origem */ 	
      custo[cidadeDeOrigem] = 0;	
+
+     /* define cidade atual como a fonte da busca */
   	 cidadeAtual = cidadeDeOrigem;
 
-	// enquanto nao chegar na cidade de destino busca o menor custo
+	/* enquanto nao chegar na cidade de destino busca o menor custo */
   	 while (cidadeAtual != cidadeDeDestino){
-  	 		// preenche vetor de custos
+  	 	
+  	 		/* calcula o custo a partir o vertice atual  ao vertice adjacente  i
+  	 		se o custo do vertice atual for menor, entao atualiza o vetor de custo */
   	 		for (int i = 0; i < numeroDeVertices; i++){
   	 			if(grafo[cidadeAtual][i] != DESCONECTADO){
   	 				if ( custo[cidadeAtual] + grafo[cidadeAtual][i] < custo[i]){
@@ -42,18 +61,21 @@ int paisesEmGuerra (int cidadeDeOrigem, int cidadeDeDestino, int numeroDeVertice
         visitados[cidadeAtual] = true;
   	 	minimo = INFINITO;
 
+  	 		/* determina o vertice com menor custo */ 
   	 		for ( int i = 0; i < numeroDeVertices; i++){
   	 			if( !visitados[i] && custo[i] < minimo ) {
 	                minimo = custo[i];
 	                cidadeAtual = i;
 	            }
   	 		}
-  	 		// se for igual a infinito nao é possivel entregar a carta
+
+  	 		/* se for igual a infinito nao é possivel entregar a carta */
   	 		if ( minimo == INFINITO ){
          		 return INFINITO;
   	 		}		           
 	}
-  // se nao retorna o custo necessario pra entregar a carta
+	/* fim do while */
+  /* retorna o custo necessario pra entregar a carta */
   return custo[cidadeDeDestino];
 
 }
