@@ -2,4 +2,4 @@
 Implementation Work - Design and Analysis of Algorithms - Problem of warring countries - UFC-Quixadá
 
 
-Problem of warring countries in O(N²)
+Problem of warring countries in O(n²)
